@@ -1,21 +1,31 @@
 
 import random
-import time
+import datetime
 
 ## 
 users = [{
-    "user_id":1
+    "user_id":1,
 	"username":"kelvin",
 	"email":"kelvin@gmail.com",
 	"password":"12345678",
-    "role":0
+    "role":0,
+    "lastLoginAt": ""
     },
     {
-    "user_id":2
+    "user_id":2,
     "username":"admin",
 	"email":"admin@gmail.com",
 	"password":"12345678",
-    "role":1
+    "role":1,
+    "lastLoginAt": ""
+    },
+        {
+    "user_id":3,
+    "username":"superadmin",
+	"email":"superadmin@gmail.com",
+	"password":"12345678",
+    "role":2,
+    "lastLoginAt": ""
     }] 
 comments = []
 
@@ -35,6 +45,16 @@ def login():
         return 'no user with that username exists'
     if user['password'] != password:
         return 'wrong password'
+    user["lastLoginAt"] = datetime.datetime.now()
+
+    if user['role']== 0:
+        normal_user = input("1. create comment /n 2.edit comment /")
+
+    if user['role']== 1:
+        moderator_user = input("1. create comment /n  2.edit comment /n 3.delete comment")
+    
+    if user['role']== 2:
+        admin_user = input("1. create comment /n  2.edit comment /n 3.delete comment")
 
 
 
