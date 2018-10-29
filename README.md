@@ -2,7 +2,7 @@
 
 Its a command line program in python3 with the following functionalities:
 
-##Note:
+## Note:
 Users come in 3 roles: 
 1. normal users
 2. moderators (who are also users)
