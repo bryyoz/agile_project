@@ -96,13 +96,52 @@ def login():
             'created_by': user_id
             }
             comments.append(data)
-            return comments
+            print(comments)
+            moderator_user1 = input("1. edit comment \n 2. delete comment \n 3. logout \n ")
+            if moderator_user1 == str("1"):
+                comment_id = int(input("Enter the comment id:"))  
+                user = input("Enter your user id:")        
+                if not comment_id:
+                    return 'You must enter the comment id'
+            # if not user_id:
+            #     return 'You must enter the comment id'
+                comm = next((comment for comment in comments if comment["comment_id"] == comment_id), False)
+                user = next((comment for comment in comments if comment["created_by"] == user_id), False)
+                # if user != False:
+                #     return ' not authorized'
+                if comm == False:
+                    return 'Comment not found!'
+                new_comment = input("Enter your comment here:")
+                comm["comment"] = new_comment
+                print(comments)
+                moderator_user2 = input("1.delete comment \n 2. logout \n ")
+                if moderator_user2 == str("1"):
+                    comment_id = int(input("Enter the comment id to delete:")) 
+                    if not comment_id:
+                        return 'You must enter the comment id'
+                    comm = next((comment for comment in comments if comment["comment_id"] == comment_id), False)
+
+                    if comm == False:
+                        return 'Comment not found!'
+                    comments.remove(comm)
+                    print(comments)
+                    moderator_user3 = input("1.logout \n ")
+                    if moderator_user3 == str("1"):
+                        login()
+
+
+
         if moderator_user == str("2"):
-            comment_id = int(input("Enter the comment id:"))
-            
+            comment_id = int(input("Enter the comment id:"))  
+            user = input("Enter your user id:")        
             if not comment_id:
                 return 'You must enter the comment id'
+            # if not user_id:
+            #     return 'You must enter the comment id'
             comm = next((comment for comment in comments if comment["comment_id"] == comment_id), False)
+            user = next((comment for comment in comments if comment["created_by"] == user_id), False)
+            if user != False:
+                return ' not authorized'
             if comm == False:
                 return 'Comment not found!'
             new_comment = input("Enter your comment here:")
@@ -136,7 +175,35 @@ def login():
             'created_by': user_id
             }
             comments.append(data)
-            return comments
+            print(comments)
+            admin_user1 = input("1.edit comment \n 2. delete comment \n 3. logout \n ")
+            if admin_user1 == str("1"):
+                comment_id = int(input("Enter the comment id:"))
+            
+                if not comment_id:
+                    return 'You must enter the comment id'
+                comm = next((comment for comment in comments if comment["comment_id"] == comment_id), False)
+                if comm == False:
+                    return 'Comment not found!'
+                new_comment = input("Enter your comment here:")
+                comm["comment"] = new_comment
+                print(comments)
+                admin_user2 = input("1.delete comment \n 2. logout \n ")
+                if admin_user2 == str("1"):
+                    comment_id = int(input("Enter the comment id to delete:")) 
+                    if not comment_id:
+                        return 'You must enter the comment id'
+                    comm = next((comment for comment in comments if comment["comment_id"] == comment_id), False)
+
+                    if comm == False:
+                        return 'Comment not found!'
+                    comments.remove(comm)
+                    print(comments) 
+                    admin_user3 = input("1. logout \n ")
+                    if admin_user3 == str("1"):
+                        login()
+                        
+            
         if admin_user == str("2"):
             comment_id = int(input("Enter the comment id:"))
             
